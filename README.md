@@ -50,7 +50,7 @@ curl -L -0 https://github.com/zendesk/maxwell/releases/download/v1.0.0/maxwell-1
 
 ### Test
 
-#### Manual Test
+#### Manual Testing
 If all goes well you'll see maxwell replaying your inserts:
 
 ```sql

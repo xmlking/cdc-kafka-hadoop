@@ -4,24 +4,24 @@ testApp
 test app to generate load on MySQL
 
 
-#### grant database permissions for grails(one time)
+#### Grant database permissions for grails(one time)
 ```sql
 mysql -u root -p
 mysql> CREATE DATABASE test;
 mysql> GRANT ALL on test.* to 'grails'@'%' identified by 'grails';
 ```
 
-#### run app
+#### Run App
 ```bash
 # from cdc-kafka-hadoop directory
 gradle -a :testApp:bootRun
 ```
 
-#### access
+#### Access
 http://localhost:8080/
 
 
-### add two primary key for Shop table.
+### Add two primary key for Shop table.
 ```sql
 DROP TABLE test.shop;
 CREATE TABLE shop
@@ -34,6 +34,3 @@ CREATE TABLE shop
   primary key (id, name)
 );
 ```
-
-logger("org.hibernate.SQL", DEBUG, ["STDOUT"], false)
-logger("org.hibernate.type.descriptor.sql.BasicBinder", TRACE, ["STDOUT"], false)

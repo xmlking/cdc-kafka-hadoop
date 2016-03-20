@@ -2,8 +2,12 @@ CDC Hadoop Dataflow
 ===================
 A low latency, multi-tenant *Change Data Capture(CDC)* pipeline to continuously replicate data from **OLTP(**MySQL**)** to **OLAP(**NoSQL**)** systems with no impact to the source.
 
-This project demonstrate how to build dataflow pipeline to move data from Operational databases(MySQL, Oracle) to Analytics databases(Hadoop, MongoDB, MarkLogic) in real-time using **Change Data Capture(CDC)**, **Kafka** and tools like **Apache NiFi**, **Kafka Streams** or **Spark** to process and ingest data into Hadoop.
 
+> This project demonstrate how to build dataflow pipeline to move data from Operational databases(MySQL, Oracle) to Analytics databases(Hadoop, MongoDB, MarkLogic) in real-time using **Change Data Capture(CDC)**, **Kafka** and tools like **Apache NiFi**, **Kafka Streams** or **Spark** to process and ingest data into Hadoop.
+
+![cdc architecture](./presentation/images/cdc-architecture.png)
+
+### Features
 
 1. Capture changes from many Data Sources and types.
 2. Feed data to many client types (real-time, slow/catch-up, full bootstrap).
@@ -74,8 +78,6 @@ Query OK, 1 row affected (0.02 sec)
 ####  Testing via Grails App
 You can also use [testApp](./testApp/) to generate load.
 
-### Architecture
-![cdc architecture](./presentation/images/cdc-architecture.png)
 
 ### Reference
 1. [Maxwell's Daemon](http://maxwells-daemon.io/quickstart/)

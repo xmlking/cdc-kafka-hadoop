@@ -30,7 +30,7 @@ Install source MySQL database and configure it with row based replication as per
 #### Install and Run Kafka
 Follow the [instructions](./storage/kafka/)
 
-#### Install and Run Kafka
+#### Install and Run Maxwell
 
 ```bash
 cd cdc/maxwell

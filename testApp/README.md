@@ -21,7 +21,10 @@ gradle -a :testApp:bootRun
 http://localhost:8080/
 
 
-### Add two primary key for Shop table.
+### Add two primary keys for Shop table.
+> Maxwell should produce both primary keys in the Kafka key.
+> {"database":"test","table":"shop","pk.id":4,"pk.name":"aaa"}
+
 ```sql
 DROP TABLE test.shop;
 CREATE TABLE shop

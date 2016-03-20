@@ -1,0 +1,12 @@
+build/
+.gradle/
+*.iml
+*.ipr
+*.iws
+.idea
+
+gradle
+gradlew.bat
+gradlew
+
+.asscache

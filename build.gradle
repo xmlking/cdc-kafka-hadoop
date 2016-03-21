@@ -1,3 +1,12 @@
+apply plugin: 'idea'
+
+group "cdc.kafka.hadoop"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }

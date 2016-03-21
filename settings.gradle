@@ -1,2 +1,3 @@
 rootProject.name = 'cdc-kafka-hadoop'
-include 'testApp'
+include 'testApp',
+        'dataflow/kstreams'

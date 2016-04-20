@@ -1,3 +1,4 @@
 rootProject.name = 'cdc-kafka-hadoop'
 include 'testApp',
-        'dataflow/kstreams'
+        'dataflow/kstreams',
+        'cdc/kafka-maxwell-connector'

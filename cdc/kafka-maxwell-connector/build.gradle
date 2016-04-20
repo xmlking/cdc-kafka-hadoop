@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'java-library-distribution'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenLocal()
+    maven {
+        url 'http://packages.confluent.io/maven/'
+    }
+}
+
+dependencies {
+    compile "org.apache.kafka:connect-api:0.9.0.1-cp1" // kafka connect version from confluentinc
+    compile "com.zendesk:maxwell:1.1.0-kafka-connect" //available from github.com/kristiankaufmann/maxwell
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "io.confluent:kafka-avro-serializer:$confluentVersion"
+
+    testCompile "junit:junit:4.11"
+    testCompile "org.easymock:easymock:3.3.1"
+    testCompile "org.powermock:powermock-module-junit4:1.6.2"
+    testCompile "org.powermock:powermock-api-easymock:1.6.2"
+}
+

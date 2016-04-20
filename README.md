@@ -58,6 +58,8 @@ curl -L -0 https://github.com/zendesk/maxwell/releases/download/v1.0.0/maxwell-1
 If all goes well you'll see maxwell replaying your inserts:
 
 ```sql
+mysql -u root -p
+
 mysql> CREATE TABLE test.shop
        (
          id BIGINT(20) NOT NULL AUTO_INCREMENT,

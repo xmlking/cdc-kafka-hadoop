@@ -21,6 +21,10 @@ zookeeper-server-start ./zookeeper.properties
 kafka-server-start ./server.properties
 ```
 
+#### To Start Schema Registry
+schema-registry-start ./schema-registry.properties
+
+
 #### Create Kafka Topic and partitioning (one time)
 ```bash
 kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic maxwell
@@ -34,6 +38,11 @@ kafka-topics --list --zookeeper localhost:2181
 #### Display messages on a topic
 ```bash
 kafka-console-consumer --zookeeper localhost:2181 --topic maxwell --from-beginning --property print.key=true
+# for kafka-maxwell-connector
+kafka-console-consumer --zookeeper localhost:2181 --topic maxwell.test.shop --from-beginning --property print.key=true
+# Show Avro data in JSON format in the console.
+kafka-avro-console-consumer --zookeeper localhost:2181 --topic maxwell.test.shop --property print.key=true --property schema.registry.url=http://localhost:8081
 ```
+
 
 *NOTE: stop Kafka first and then Zookeeper*

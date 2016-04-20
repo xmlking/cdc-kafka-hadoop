@@ -20,6 +20,7 @@ mysqld --defaults-file=./my.cnf --initialize-insecure --user=`whoami`
 
 ### Run MySQL
 ```bash
+cd storage/mysql/
 mysqld --defaults-file=./my.cnf # start
 mysqladmin -u root -p shutdown  # stop
 ```

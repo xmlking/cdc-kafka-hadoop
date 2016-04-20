@@ -33,19 +33,19 @@ What needs to be done:
 ### Build
 
 1.  Pull down the Maxwell fork.
-    ```
-    (with in separate directory outside this project: e.g., /work/)
+    ```bash
+    # (with in separate directory outside this project: e.g., /work/)
     git clone https://github.com/xmlking/maxwell.git maxwell
     ```
 
 2.  Build my Maxwell fork
-    ```
+    ```bash
     (cd maxwell && git checkout 1.1.0-kafka-connect && mvn install)
     ```
 
 3.  Build and "install" connector within the build directory.
-    ```
-    (with in root project directory i.e., cdc-kafka-hadoop)
+    ```bash
+    # (with in root project directory i.e., cdc-kafka-hadoop)
     gradle :cdc/kafka-maxwell-connector:build :cdc/kafka-maxwell-connector:installDist -x test
     ```
 
@@ -54,7 +54,7 @@ What needs to be done:
 Start MySQL, ZooKeeper, Kafka, Schema Registry as [described](/storage/kafka/) and then run `kafka-maxwell-connector`
 
 ```bash
-(with in cdc/kafka-maxwell-connector directory)
+#  (with in cdc/kafka-maxwell-connector directory)
 export CLASSPATH=`pwd`/build/install/cdc/kafka-maxwell-connector/kafka-maxwell-connector-0.1.0-SNAPSHOT.jar:`pwd`/build/install/cdc/kafka-maxwell-connector/lib/*
 export PATH=$PATH:/Developer/Applications/confluent-2.1.0-alpha1/bin
 connect-standalone copycat-standalone.properties connect-mysql-source.properties

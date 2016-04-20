@@ -53,31 +53,31 @@ What needs to be done:
 
 Start MySQL, ZooKeeper, Kafka, Schema Registry as [described](/storage/kafka/) and then run `kafka-maxwell-connector`
 
-    ```
-    (with in cdc/kafka-maxwell-connector directory)
-    export CLASSPATH=`pwd`/build/install/cdc/kafka-maxwell-connector/kafka-maxwell-connector-0.1.0-SNAPSHOT.jar:`pwd`/build/install/cdc/kafka-maxwell-connector/lib/*
-    export PATH=$PATH:/Developer/Applications/confluent-2.1.0-alpha1/bin
-    connect-standalone copycat-standalone.properties connect-mysql-source.properties
-    ```
+```bash
+(with in cdc/kafka-maxwell-connector directory)
+export CLASSPATH=`pwd`/build/install/cdc/kafka-maxwell-connector/kafka-maxwell-connector-0.1.0-SNAPSHOT.jar:`pwd`/build/install/cdc/kafka-maxwell-connector/lib/*
+export PATH=$PATH:/Developer/Applications/confluent-2.1.0-alpha1/bin
+connect-standalone copycat-standalone.properties connect-mysql-source.properties
+```
 
 ### Test
 
-    ```
-    mysql> INSERT INTO test.shop (version, name, owner, phone_number) values (0, 'aaaa', 'bbbb', '1111111111');
-    ```
+```sql
+mysql> INSERT INTO test.shop (version, name, owner, phone_number) values (0, 'aaaa', 'bbbb', '1111111111');
+```
 
 You can also generate database transactions using [testApp](/testApp/).
 
 ####  Display messages on a topic
 
-    ```bash
-    export PATH=$PATH:/Developer/Applications/confluent-2.1.0-alpha1/bin
-    # Show  data in JSON format in the console.
-    kafka-console-consumer --zookeeper localhost:2181 --topic maxwell.test.shop --from-beginning --property print.key=true
-    # Show  data in Avro format in the console.
-    kafka-avro-console-consumer --zookeeper localhost:2181 --topic maxwell.test.shop --property print.key=true --property schema.registry.url=http://localhost:8081
-    ```
+```bash
+export PATH=$PATH:/Developer/Applications/confluent-2.1.0-alpha1/bin
+# Show  data in JSON format in the console.
+kafka-console-consumer --zookeeper localhost:2181 --topic maxwell.test.shop --from-beginning --property print.key=true
+# Show  data in Avro format in the console.
+kafka-avro-console-consumer --zookeeper localhost:2181 --topic maxwell.test.shop --property print.key=true --property schema.registry.url=http://localhost:8081
+```
 
-    ```json
-    {"id":{"long":7},"name":{"string":"aaaa"}}      {"data":{"id":{"long":7},"version":{"long":0},"name":{"string":"aaaa"},"owner":{"string":"bbbb"},"phone_number":{"string":"1111111111"}},"old":{"id":null,"version":null,"name":null,"owner":null,"phone_number":null},"database":"test","table":"shop","mut_type":"insert","xid":12802,"ts":1461111727}
-    ```
+```json
+{"id":{"long":7},"name":{"string":"aaaa"}}      {"data":{"id":{"long":7},"version":{"long":0},"name":{"string":"aaaa"},"owner":{"string":"bbbb"},"phone_number":{"string":"1111111111"}},"old":{"id":null,"version":null,"name":null,"owner":null,"phone_number":null},"database":"test","table":"shop","mut_type":"insert","xid":12802,"ts":1461111727}
+```

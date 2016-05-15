@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.apache.kafka:connect-api:0.9.0.1-cp1" // kafka connect version from confluentinc
+    compile "org.apache.kafka:connect-api:$kafkaVersion" // kafka connect version from confluentinc
     compile "com.zendesk:maxwell:1.1.0-kafka-connect" //available from github.com/kristiankaufmann/maxwell
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile "io.confluent:kafka-avro-serializer:$confluentVersion"

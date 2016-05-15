@@ -4,6 +4,7 @@
 logs
 *.log
 NOTES.md
+debezium-connector-mysql
 
 ### Gradle ###
 .gradle

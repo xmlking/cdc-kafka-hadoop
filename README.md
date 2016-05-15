@@ -29,10 +29,10 @@ A low latency, multi-tenant *Change Data Capture(CDC)* pipeline to continuously 
 ### Setup
 
 #### Install and Run MySQL
-Install source MySQL database and configure it with row based replication as per [instructions](./storage/mysql/).
+Install source MySQL database and configure it with row based replication as per [instructions](./infrastructure/mysql/).
 
 #### Install and Run Kafka
-Follow the [instructions](./storage/kafka/)
+Follow the [instructions](./infrastructure/kafka/)
 
 #### Install and Run Maxwell
 

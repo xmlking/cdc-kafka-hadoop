@@ -13,10 +13,9 @@ repositories {
 }
 
 dependencies {
-    compile "org.codehaus.groovy:groovy-all:2.4.6"
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile "ch.qos.logback:logback-classic:$logbackVersion"
-    compile "io.confluent:kafka-avro-serializer:$confluentVersion"
     compile "org.apache.kafka:kafka-clients:$kafkaVersion"
     compile "org.apache.kafka:kafka-streams:$kafkaVersion"
     compile "org.apache.avro:avro:1.7.7"

@@ -3,7 +3,7 @@ MySQL
 Database setup and configuration for Maxwell CDC integration
 
 ### working directory
-*you will be running all commends below from* **storage/mysql** *directory*
+*you will be running all commends below from* **infrastructure/mysql** *directory*
 
 ### Install MySQL (one time)
 ```bash
@@ -20,7 +20,7 @@ mysqld --defaults-file=./my.cnf --initialize-insecure --user=`whoami`
 
 ### Run MySQL
 ```bash
-cd storage/mysql/
+cd infrastructure/mysql/
 mysqld --defaults-file=./my.cnf # start
 mysqladmin -u root -p shutdown  # stop
 ```

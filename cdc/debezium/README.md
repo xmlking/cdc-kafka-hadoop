@@ -33,6 +33,7 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json"l
         "database.server.name": "mysql-server-1",
         "database.binlog": "master.000001",
         "database.whitelist": "test",
+        "table.blacklist": "test.shop",
         "database.history.kafka.bootstrap.servers": "localhost:9092",
         "database.history.kafka.topic": "schema-changes.inventory"
     }
@@ -53,7 +54,7 @@ curl -i -X GET -H "Accept:application/json" localhost:8083/connectors/inventory-
 $KAFKA_HOME/bin/kafka-topics --list --zookeeper localhost:2181
 $KAFKA_HOME/bin/kafka-console-consumer --zookeeper localhost:2181 --topic mysql-server-1.test.book --from-beginning --property print.key=true
 $KAFKA_HOME/bin/kafka-console-consumer --zookeeper localhost:2181 --topic mysql-server-1.test.author --from-beginning --property print.key=true
-$KAFKA_HOME/bin/kafka-console-consumer --zookeeper localhost:2181 --topic schema-changes.test --from-beginning --property print.key=true
+$KAFKA_HOME/bin/kafka-console-consumer --zookeeper localhost:2181 --topic schema-changes.inventory --from-beginning --property print.key=true
 ```
 
 

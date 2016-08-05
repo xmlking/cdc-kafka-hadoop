@@ -40,7 +40,7 @@ What needs to be done:
 
 2.  Build my Maxwell fork
     ```bash
-    (cd maxwell && git checkout 1.1.0-kafka-connect && mvn install)
+    (cd maxwell && git checkout 1.1.2-kafka-connect && mvn install)
     ```
 
 3.  Build and "install" connector within the build directory.

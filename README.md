@@ -38,7 +38,8 @@ Follow the [instructions](./infrastructure/kafka/)
 
 ```bash
 cd cdc/maxwell
-curl -L -0 https://github.com/zendesk/maxwell/releases/download/v1.0.0/maxwell-1.0.0.tar.gz | tar --strip-components=1 -zx -C .
+# curl -L -0 https://github.com/zendesk/maxwell/releases/download/v1.0.0/maxwell-1.1.2.tar.gz | tar --strip-components=1 -zx -C .
+curl -L -0 https://github.com/xmlking/maxwell/releases/download/1.1.2.1/maxwell-1.1.2.1-kafka-connect.tar.gz | tar --strip-components=1 -zx -C .
 ```
 
 ### Run

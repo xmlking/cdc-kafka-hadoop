@@ -7,8 +7,8 @@ test app to generate load on MySQL
 #### Grant database permissions for grails(one time)
 ```sql
 mysql -u root -p
-mysql> CREATE DATABASE test;
-mysql> GRANT ALL on test.* to 'grails'@'%' identified by 'grails';
+mysql> CREATE DATABASE IF NOT EXISTS test;
+mysql> GRANT ALL on test.* to 'app'@'%' identified by 'apppwd';
 ```
 
 #### Run App

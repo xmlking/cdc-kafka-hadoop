@@ -1,61 +1,51 @@
-debezium-connector-mysql
-========================
+# Debezium Tutorial
 
-### Setup
+This demo automatically deploys the topology of services as defined in [Debezium Tutorial](http://debezium.io/docs/tutorial/) document.
 
-```bash
-cd cdc/debezium
-curl https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/0.1.0/debezium-connector-mysql-0.1.0-plugin.tar.gz | tar xz
+## Using MySQL
+
+```shell
+# Start the topology as defined in http://debezium.io/docs/tutorial/
+export DEBEZIUM_VERSION=0.6
+docker-compose -f docker-compose-mysql.yaml up
+
+# Start MySQL connector
+curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-mysql.json
+
+# Consume messages from a Debezium topic
+docker-compose -f docker-compose-mysql.yaml exec kafka /kafka/bin/kafka-console-consumer.sh \
+    --bootstrap-server kafka:9092 \
+    --from-beginning \
+    --property print.key=true \
+    --topic dbserver1.inventory.customers
+
+# Modify records in the database via MySQL client
+docker-compose -f docker-compose-mysql.yaml exec mysql bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD inventory'
+
+# Shut down the cluster
+docker-compose -f docker-compose-mysql.yaml down
 ```
 
-### Run
-```bash
-cd cdc/debezium
-export KAFKA_HOME=/Developer/Applications/confluent-2.1.0-alpha1
-export CLASSPATH=`pwd`/debezium-connector-mysql/*
-$KAFKA_HOME/bin/connect-distributed connect-distributed.properties
+## Using Postgres
+
+```shell
+# Start the topology as defined in http://debezium.io/docs/tutorial/
+export DEBEZIUM_VERSION=0.6
+docker-compose -f docker-compose-postgres.yaml up
+
+# Start Postgres connector
+curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-postgres.json
+
+# Consume messages from a Debezium topic
+docker-compose -f docker-compose-postgres.yaml exec kafka /kafka/bin/kafka-console-consumer.sh \
+    --bootstrap-server kafka:9092 \
+    --from-beginning \
+    --property print.key=true \
+    --topic dbserver1.inventory.customers
+
+# Modify records in the database via Postgres client
+docker-compose -f docker-compose-postgres.yaml exec postgres env PGOPTIONS="--search_path=inventory" bash -c 'psql -U $POSTGRES_USER postgres'
+
+# Shut down the cluster
+docker-compose -f docker-compose-postgres.yaml down
 ```
-
-
-#### add task
-```json
-curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json"localhost:8083/connectors/ -d
-{
-    "name": "inventory-connector",
-    "config": {
-        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
-        "tasks.max": "1",
-        "database.hostname": "localhost",
-        "database.port": "3306",
-        "database.user": "maxwell",
-        "database.password": "XXXXXX",
-        "database.server.id": "1",
-        "database.server.name": "mysql-server-1",
-        "database.binlog": "master.000001",
-        "database.whitelist": "test",
-        "table.blacklist": "test.shop",
-        "database.history.kafka.bootstrap.servers": "localhost:9092",
-        "database.history.kafka.topic": "schema-changes.inventory"
-    }
-}
-```
-
-#### delete task
-```
-curl -i -X DELETE localhost:8083/connectors/inventory-connector
-```
-
-### Test
-```
-curl -H "Accept:application/json" localhost:8083/connectors/
-curl -i -X GET -H "Accept:application/json" localhost:8083/connectors/inventory-connector
-
-
-$KAFKA_HOME/bin/kafka-topics --list --zookeeper localhost:2181
-$KAFKA_HOME/bin/kafka-console-consumer --zookeeper localhost:2181 --topic mysql-server-1.test.book --from-beginning --property print.key=true
-$KAFKA_HOME/bin/kafka-console-consumer --zookeeper localhost:2181 --topic mysql-server-1.test.author --from-beginning --property print.key=true
-$KAFKA_HOME/bin/kafka-console-consumer --zookeeper localhost:2181 --topic schema-changes.inventory --from-beginning --property print.key=true
-```
-
-
-

@@ -21,22 +21,24 @@ if (flowFile !== null) {
         payload.push(akey, keyJson[akey]);
     });
 
-    var lcr = util.flowFileToString(flowFile, session);
-    lcr = JSON.parse(lcr);
+    lcrJson = JSON.parse(util.flowFileToString(flowFile, session));
+
+    var version = flowFile.getAttribute("version");
 
     var attMap = new java.util.HashMap();
-    attMap.put('database', lcr.database);
-    attMap.put('table', lcr.table);
-    attMap.put('type', lcr.type);
-    attMap.put('ts', lcr.ts.toString());
-    attMap.put('correlation-identifier', lcr.database + "-" + lcr.table + "-" + lcr.type);
+    attMap.put('database', lcrJson.database);
+    attMap.put('table', lcrJson.table);
+    attMap.put('type', lcrJson.type);
+    attMap.put('ts', lcrJson.ts.toString());
+    attMap.put('correlation-identifier', lcrJson.database + "-" + lcrJson.table + "-" + version + "-" + lcrJson.type);
+    attMap.put('version', version);
 
 
-    payload.unshift(attMap['ts'], lcr.type, lcr.database, lcr.table);
+    payload.unshift(attMap['ts'], lcrJson.type, lcrJson.database, lcrJson.table);
     payload = payload.join(", ");
 
-    Object.keys(lcr.data).forEach(function (key) {
-        var fFile = util.stringToFlowFile(payload + ", " + key + ", " + lcr.data[key], session);
+    Object.keys(lcrJson.data).forEach(function (key) {
+        var fFile = util.stringToFlowFile(payload + ", " + key + ", " + lcrJson.data[key], session);
         fFile = session.putAllAttributes(fFile, attMap);
         fFile = session.putAttribute(fFile, 'key', key);
         session.transfer(fFile, REL_SUCCESS)

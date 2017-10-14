@@ -89,3 +89,4 @@ You can also use [testApp](./testApp/) to generate load.
 4. [Martin Kleppman's blog: Using logs to build a solid data infrastructure](https://martin.kleppmann.com/2015/05/27/logs-for-data-infrastructure.html)
 5. [Bottled Water: Real-time integration of PostgreSQL and Kafka](http://www.confluent.io/blog/bottled-water-real-time-integration-of-postgresql-and-kafka/)
 6. [debezium-examples](https://github.com/debezium/debezium-examples)
+7. [Tutorial on using NiFi's built-in CDC - 3 parts](https://community.hortonworks.com/articles/113941/change-data-capture-cdc-with-apache-nifi-version-1-1.html)
